@@ -54,6 +54,7 @@ public:
             throw std::out_of_range("Index out of range");
         return buffer[indx];
     }
+    
 };
 
 int main() {
