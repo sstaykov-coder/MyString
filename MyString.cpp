@@ -16,7 +16,44 @@ public:
         if (buffer != nullptr)
             delete[] buffer;
     }
+    MyString(const MyString& other) {
+        length = other.length;
+        bufferSize = other.length + 1;
+        buffer = new char[bufferSize];
+        std::strcpy(buffer, other.buffer);
+    }
 
+    // Assignment operator
+    MyString& operator=(const MyString& other) {
+        if (this != &other) {
+            length = other.length;
+            bufferSize = other.length + 1;
+            delete[] buffer;
+            buffer = new char[bufferSize];
+            std::strcpy(buffer, other.buffer);
+        }
+        return *this;
+    }
+
+    // Member functions (unchanged)
+
+    unsigned size() const {
+        return length;
+    }
+
+    unsigned capacity() const {
+        return bufferSize - 1;
+    }
+
+    const char* c_str() const {
+        return buffer;
+    }
+
+    char at(unsigned indx) const {
+        if (indx >= length)
+            throw std::out_of_range("Index out of range");
+        return buffer[indx];
+    }
 };
 
 int main() {
